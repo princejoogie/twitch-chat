@@ -1,0 +1,21 @@
+.container {
+  position: relative;
+  overflow: visible;
+  margin-top: 5px;
+}
+
+.line {
+  padding: var(--message-padding);
+  line-height: 1.5;
+  vertical-align: middle;
+  border-radius: 4px;
+  background: var(--color-message-background);
+  word-wrap: break-word;
+  text-shadow: var(--message-text-shadow);
+  animation: var(--message-animation);
+  // transform: translateY(5px);
+}
+
+.name {
+  margin-right: 5px;
+}
