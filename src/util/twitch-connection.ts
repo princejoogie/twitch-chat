@@ -104,7 +104,6 @@ export class TwitchConnection {
   }
 
   private handleDisconnect() {
-    // prevent duplicate reconnection attempts
     if (this.state === ConnectionState.Disconnected) return;
     this.state = ConnectionState.Disconnected;
 
