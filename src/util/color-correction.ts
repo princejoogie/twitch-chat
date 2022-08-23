@@ -1,11 +1,7 @@
 const IS_COLOR = /^#[A-F0-9]+$/i;
 const NOT_COLOR = /[^A-F0-9]/gi;
 
-function rgbToHsl(
-  r: number,
-  g: number,
-  b: number,
-): [number, number, number] {
+function rgbToHsl(r: number, g: number, b: number): [number, number, number] {
   // Convert RGB to HSL, not ideal but it's faster than HCL or full YIQ conversion
   // based on http://axonflux.com/handy-rgb-to-hsl-and-rgb-to-hsv-color-model-c
   r /= 255;
@@ -40,11 +36,7 @@ function rgbToHsl(
   return [h, s, l];
 }
 
-function hslToRgb(
-  h: number,
-  s: number,
-  l: number,
-): [number, number, number] {
+function hslToRgb(h: number, s: number, l: number): [number, number, number] {
   const hueToRgb = (pp: number, qq: number, t: number) => {
     if (t < 0) t += 1;
     if (t > 1) t -= 1;
@@ -62,13 +54,9 @@ function hslToRgb(
   const q = l < 0.5 ? l * (1 + s) : l + s - l * s;
   const p = 2 * l - q;
   return [
-    Math.round(
-      Math.min(Math.max(0, 255 * hueToRgb(p, q, h + 1 / 3)), 255),
-    ),
+    Math.round(Math.min(Math.max(0, 255 * hueToRgb(p, q, h + 1 / 3)), 255)),
     Math.round(Math.min(Math.max(0, 255 * hueToRgb(p, q, h)), 255)),
-    Math.round(
-      Math.min(Math.max(0, 255 * hueToRgb(p, q, h - 1 / 3)), 255),
-    ),
+    Math.round(Math.min(Math.max(0, 255 * hueToRgb(p, q, h - 1 / 3)), 255)),
   ];
 }
 
@@ -104,13 +92,7 @@ export class ColorCorrection {
     color = color.replace(NOT_COLOR, "");
 
     if (color.length < 6) {
-      color =
-        color[0] +
-        color[0] +
-        color[1] +
-        color[1] +
-        color[2] +
-        color[2];
+      color = color[0] + color[0] + color[1] + color[1] + color[2] + color[2];
     }
 
     const r = parseInt(color.substr(0, 2), 16);
@@ -137,13 +119,7 @@ export class ColorCorrection {
   private shouldConvertColor(color: string) {
     color = color.replace(NOT_COLOR, "");
     if (color.length < 6) {
-      color =
-        color[0] +
-        color[0] +
-        color[1] +
-        color[1] +
-        color[2] +
-        color[2];
+      color = color[0] + color[0] + color[1] + color[1] + color[2] + color[2];
     }
 
     const r = parseInt(color.substr(0, 2), 16);

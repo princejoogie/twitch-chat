@@ -1,4 +1,4 @@
-import {ThirdPartyEmote} from "../../models/third-party-emote";
+import { ThirdPartyEmote } from "../../models/third-party-emote";
 
 export interface ThirdPartyEmoteState {
   ffzUserEmotes: EmoteMap;
@@ -24,7 +24,7 @@ export interface FrankerfacezGlobalBody {
 }
 
 export interface FrankerfacezUserBody {
-  room: {set: number};
+  room: { set: number };
   sets: Record<string, FrankerfacezSet>;
 }
 

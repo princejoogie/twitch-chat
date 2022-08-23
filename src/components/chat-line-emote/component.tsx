@@ -6,10 +6,6 @@ interface Props {
   url: string;
 }
 
-export const ChatLineEmote: React.FunctionComponent<Props> = (
-  props: Props,
-) => {
-  return (
-    <img src={props.url} alt={props.name} className={styles.emote} />
-  );
+export const ChatLineEmote: React.FunctionComponent<Props> = (props: Props) => {
+  return <img src={props.url} alt={props.name} className={styles.emote} />;
 };

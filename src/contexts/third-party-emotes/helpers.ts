@@ -2,7 +2,7 @@ import {
   ThirdPartyEmote,
   ThirdPartyEmoteProvider,
 } from "../../models/third-party-emote";
-import {ApiClient} from "../../util/api-client";
+import { ApiClient } from "../../util/api-client";
 import {
   BetterttvGlobalBody,
   BetterttvUserBody,
@@ -24,7 +24,7 @@ export const parseFFZSet = (set: FrankerfacezSet) => {
       emote.id.toString(),
       ThirdPartyEmoteProvider.FrankerFaceZ,
       emote.name,
-      ThirdPartyEmote.getFrankerfacezImageURL(emote.id),
+      ThirdPartyEmote.getFrankerfacezImageURL(emote.id)
     );
   }
 
@@ -33,36 +33,28 @@ export const parseFFZSet = (set: FrankerfacezSet) => {
 
 export const getFFZGlobalEmotes = (): Promise<EmoteMap> =>
   api
-    .get<FrankerfacezGlobalBody>(
-      "https://api.frankerfacez.com/v1/set/global",
-    )
+    .get<FrankerfacezGlobalBody>("https://api.frankerfacez.com/v1/set/global")
     .then((res) =>
       (res.body?.default_sets ?? [])
-        .map((setId) =>
-          parseFFZSet(res?.body?.sets[setId.toString()] || {}),
-        )
-        .reduce((acc, cur) => ({...acc, ...cur}), {} as EmoteMap),
+        .map((setId) => parseFFZSet(res?.body?.sets[setId.toString()] || {}))
+        .reduce((acc, cur) => ({ ...acc, ...cur }), {} as EmoteMap)
     )
     .catch((error) => {
       console.error("Failed to get FFZ global emotes", error);
       return {};
     });
 
-export const getFFZUserEmotes = (
-  channelId: string,
-): Promise<EmoteMap> =>
+export const getFFZUserEmotes = (channelId: string): Promise<EmoteMap> =>
   api
     .get<FrankerfacezUserBody>(
-      `https://api.frankerfacez.com/v1/room/id/${encodeURIComponent(
-        channelId,
-      )}`,
+      `https://api.frankerfacez.com/v1/room/id/${encodeURIComponent(channelId)}`
     )
     .then((res) =>
       parseFFZSet(
         res?.body?.sets[res.body.room.set ?? "".toString()] || {
           emoticons: [],
-        },
-      ),
+        }
+      )
     )
     .catch((error) => {
       console.error("Failed to get FFZ user emotes", error);
@@ -72,7 +64,7 @@ export const getFFZUserEmotes = (
 export const getBTTVGlobalEmotes = (): Promise<EmoteMap> =>
   api
     .get<BetterttvGlobalBody>(
-      "https://api.betterttv.net/3/cached/emotes/global",
+      "https://api.betterttv.net/3/cached/emotes/global"
     )
     .then((res) =>
       res.body.reduce((acc, cur) => {
@@ -80,24 +72,22 @@ export const getBTTVGlobalEmotes = (): Promise<EmoteMap> =>
           cur.id,
           ThirdPartyEmoteProvider.BetterTTV,
           cur.code,
-          ThirdPartyEmote.getBetterttvImageURL(cur.id),
+          ThirdPartyEmote.getBetterttvImageURL(cur.id)
         );
         return acc;
-      }, {} as EmoteMap),
+      }, {} as EmoteMap)
     )
     .catch((error) => {
       console.error("Failed to get BTTV global emotes", error);
       return {};
     });
 
-export const getBTTVUserEmotes = (
-  channelId: string,
-): Promise<EmoteMap> =>
+export const getBTTVUserEmotes = (channelId: string): Promise<EmoteMap> =>
   api
     .get<BetterttvUserBody>(
       `https://api.betterttv.net/3/cached/users/twitch/${encodeURIComponent(
-        channelId,
-      )}`,
+        channelId
+      )}`
     )
     .then((res) =>
       [
@@ -108,10 +98,10 @@ export const getBTTVUserEmotes = (
           cur.id,
           ThirdPartyEmoteProvider.BetterTTV,
           cur.code,
-          ThirdPartyEmote.getBetterttvImageURL(cur.id),
+          ThirdPartyEmote.getBetterttvImageURL(cur.id)
         );
         return acc;
-      }, {} as EmoteMap),
+      }, {} as EmoteMap)
     )
     .catch((error) => {
       console.error("Failed to get BTTV user emotes", error);

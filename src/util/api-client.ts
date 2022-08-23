@@ -1,4 +1,4 @@
-import {RequestError} from "./request-error";
+import { RequestError } from "./request-error";
 
 export interface ApiClientOptions {
   baseUrl?: string;
@@ -37,12 +37,12 @@ export class ApiClient {
   }
 
   public request<T>(
-    config: ApiClientRequestConfig,
+    config: ApiClientRequestConfig
   ): Promise<ApiClientResponse<T>> {
     return fetch(
       this.parseUrl(
         (config.baseUrl || this.baseUrl || "") + config.url,
-        config.query,
+        config.query
       ),
       {
         method: config.method,
@@ -51,18 +51,15 @@ export class ApiClient {
           ...this.headers,
           ...(config.headers || {}),
         },
-      },
+      }
     )
       .then((response) =>
         response.json().then((body) => ({
           body: body as T,
           status: response.status,
           statusText: response.statusText,
-          headers: (response.headers as unknown) as Record<
-            string,
-            string
-          >,
-        })),
+          headers: response.headers as unknown as Record<string, string>,
+        }))
       )
       .catch(this.handleError);
   }
@@ -70,7 +67,7 @@ export class ApiClient {
   public get<T>(
     url: string,
     qs?: Record<string, string | string[]>,
-    headers?: Record<string, string>,
+    headers?: Record<string, string>
   ) {
     return this.request<T>({
       url: url,
@@ -84,7 +81,7 @@ export class ApiClient {
     url: string,
     body?: Record<string, unknown> | string | FormData,
     qs?: Record<string, string | string[]>,
-    headers?: Record<string, string>,
+    headers?: Record<string, string>
   ) {
     return this.request<T>({
       url: url,
@@ -99,7 +96,7 @@ export class ApiClient {
     url: string,
     body?: Record<string, unknown> | string | FormData,
     qs?: Record<string, string | string[]>,
-    headers?: Record<string, string>,
+    headers?: Record<string, string>
   ) {
     return this.request<T>({
       url: url,
@@ -113,7 +110,7 @@ export class ApiClient {
   public delete<T>(
     url: string,
     qs?: Record<string, string | string[]>,
-    headers?: Record<string, string>,
+    headers?: Record<string, string>
   ) {
     return this.request<T>({
       url: url,
@@ -127,7 +124,7 @@ export class ApiClient {
     url: string,
     body?: Record<string, unknown> | string | FormData,
     qs?: Record<string, string | string[]>,
-    headers?: Record<string, string>,
+    headers?: Record<string, string>
   ) {
     return this.request<T>({
       url: url,
@@ -138,10 +135,7 @@ export class ApiClient {
     });
   }
 
-  private parseUrl(
-    base: string,
-    query?: Record<string, string | string[]>,
-  ) {
+  private parseUrl(base: string, query?: Record<string, string | string[]>) {
     if (!query) {
       return base;
     }
@@ -150,15 +144,11 @@ export class ApiClient {
       const value = query[key];
       if (Array.isArray(value)) {
         for (const item of value as string[]) {
-          params.push(
-            `${encodeURIComponent(key)}=${encodeURIComponent(item)}`,
-          );
+          params.push(`${encodeURIComponent(key)}=${encodeURIComponent(item)}`);
         }
       } else {
         params.push(
-          `${encodeURIComponent(key)}=${
-            encodeURIComponent(value) as string
-          }`,
+          `${encodeURIComponent(key)}=${encodeURIComponent(value) as string}`
         );
       }
     }
@@ -171,8 +161,6 @@ export class ApiClient {
   }
 
   private handleError(err: RequestError) {
-    return Promise.reject(
-      new RequestError(err.message, err.statusCode || 500),
-    );
+    return Promise.reject(new RequestError(err.message, err.statusCode || 500));
   }
 }

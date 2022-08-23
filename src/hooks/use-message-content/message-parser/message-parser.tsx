@@ -1,20 +1,18 @@
 import * as React from "react";
-import {ChatLineEmote} from "../../../components/chat-line-emote";
-import {EmoteMap} from "../../../contexts/third-party-emotes";
-import {ChatMessage} from "../../../models";
+import { ChatLineEmote } from "../../../components/chat-line-emote";
+import { EmoteMap } from "../../../contexts/third-party-emotes";
+import { ChatMessage } from "../../../models";
 
 export class MessageParser {
   public static parseThirdPartyEmotes(
     emotes: EmoteMap,
-    splits: React.ReactNode[],
+    splits: React.ReactNode[]
   ) {
     const res: React.ReactNode[] = [];
     const _matchWord = (word: string): React.ReactNode => {
       const emote = emotes[word];
       if (emote) {
-        return (
-          <ChatLineEmote name={emote.name} url={emote.imageUrl} />
-        );
+        return <ChatLineEmote name={emote.name} url={emote.imageUrl} />;
       }
       return word;
     };

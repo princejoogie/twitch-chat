@@ -1,8 +1,8 @@
-import {IRCMessage} from "irc-message-ts";
-import {ChatBadge} from "./chat-badge";
-import {ChatEmote} from "./chat-emote";
-import {ChatEmotePlacement} from "./chat-emote-placement";
-import {ChatMessageUser} from "./chat-message-user";
+import { IRCMessage } from "irc-message-ts";
+import { ChatBadge } from "./chat-badge";
+import { ChatEmote } from "./chat-emote";
+import { ChatEmotePlacement } from "./chat-emote-placement";
+import { ChatMessageUser } from "./chat-message-user";
 
 // eslint-disable-next-line no-control-regex
 const isActionRegex = /^\u0001ACTION (.*)\u0001$/;
@@ -30,7 +30,7 @@ export class ChatMessage {
       ircMessage.tags["user-id"] || "",
       ircMessage.prefix?.split("!")[0] || "",
       ircMessage.tags["display-name"] || "",
-      ircMessage.tags.color || "#666",
+      ircMessage.tags.color || "#666"
     );
 
     this.parseBadges();
@@ -65,8 +65,7 @@ export class ChatMessage {
         placements.push(new ChatEmotePlacement(start, end));
       }
 
-      placements.length &&
-        this.emotes.push(new ChatEmote(emoteID, placements));
+      placements.length && this.emotes.push(new ChatEmote(emoteID, placements));
     }
   }
 }

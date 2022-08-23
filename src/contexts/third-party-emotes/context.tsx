@@ -5,16 +5,15 @@ import {
   getFFZGlobalEmotes,
   getFFZUserEmotes,
 } from "./helpers";
-import {EmoteMap, ThirdPartyEmoteState} from "./types";
+import { EmoteMap, ThirdPartyEmoteState } from "./types";
 
-export const ThirdPartyEmotesContext = React.createContext<ThirdPartyEmoteState>(
-  {
+export const ThirdPartyEmotesContext =
+  React.createContext<ThirdPartyEmoteState>({
     bttvUserEmotes: {},
     bttvGlobalEmotes: {},
     ffzUserEmotes: {},
     ffzGlobalEmotes: {},
-  },
-);
+  });
 
 interface Props {
   channelId: string;
@@ -22,23 +21,12 @@ interface Props {
 }
 
 export const ThirdPartyEmotesProvider: React.FunctionComponent<Props> = (
-  props: Props,
+  props: Props
 ) => {
-  const [ffzUserEmotes, setFfzUserEmotes] = React.useState<EmoteMap>(
-    {},
-  );
-  const [
-    ffzGlobalEmotes,
-    setFfzGlobalEmotes,
-  ] = React.useState<EmoteMap>({});
-  const [
-    bttvUserEmotes,
-    setBttvUserEmotes,
-  ] = React.useState<EmoteMap>({});
-  const [
-    bttvGlobalEmotes,
-    setBttvGlobalEmotes,
-  ] = React.useState<EmoteMap>({});
+  const [ffzUserEmotes, setFfzUserEmotes] = React.useState<EmoteMap>({});
+  const [ffzGlobalEmotes, setFfzGlobalEmotes] = React.useState<EmoteMap>({});
+  const [bttvUserEmotes, setBttvUserEmotes] = React.useState<EmoteMap>({});
+  const [bttvGlobalEmotes, setBttvGlobalEmotes] = React.useState<EmoteMap>({});
 
   React.useEffect(() => {
     getFFZGlobalEmotes().then(setFfzGlobalEmotes);

@@ -1,5 +1,5 @@
-import {parse as parseMessage} from "irc-message-ts";
-import {ChatMessage} from "../models";
+import { parse as parseMessage } from "irc-message-ts";
+import { ChatMessage } from "../models";
 
 type MessageCallback = (message: ChatMessage) => void;
 
@@ -32,10 +32,7 @@ export class TwitchConnection {
 
     this.state = ConnectionState.Connecting;
     // give 5s to connect
-    this.connectionTimeout = setTimeout(
-      () => this.handleDisconnect(),
-      5000,
-    );
+    this.connectionTimeout = setTimeout(() => this.handleDisconnect(), 5000);
 
     this.conn = new WebSocket("wss://irc-ws.chat.twitch.tv/");
 
@@ -85,8 +82,7 @@ export class TwitchConnection {
 
       case "PRIVMSG": {
         return (
-          this.messageCallback &&
-          this.messageCallback(new ChatMessage(parsed))
+          this.messageCallback && this.messageCallback(new ChatMessage(parsed))
         );
       }
 
@@ -118,7 +114,7 @@ export class TwitchConnection {
 
     setTimeout(
       () => this.connect(),
-      Math.min(this.connectionAttempts * 2000, MAX_RECONNECT_TIMEOUT),
+      Math.min(this.connectionAttempts * 2000, MAX_RECONNECT_TIMEOUT)
     );
   }
 

@@ -1,6 +1,6 @@
-import {useEffect, useState} from "react";
-import {ChatMessage} from "../../models";
-import {TwitchConnection} from "../../util/twitch-connection";
+import { useEffect, useState } from "react";
+import { ChatMessage } from "../../models";
+import { TwitchConnection } from "../../util/twitch-connection";
 
 interface HookCallbacks {
   onMessage(message: ChatMessage): void;
@@ -10,10 +10,10 @@ interface HookCallbacks {
 
 export function useTwitchConnection(
   login: string,
-  callbacks: HookCallbacks,
+  callbacks: HookCallbacks
 ): TwitchConnection {
   const [connection, setConnection] = useState<TwitchConnection>(
-    new TwitchConnection(login),
+    new TwitchConnection(login)
   );
 
   useEffect(() => {

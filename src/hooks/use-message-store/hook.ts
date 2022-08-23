@@ -1,5 +1,5 @@
-import {useMemo, useState} from "react";
-import {ChatMessage} from "../../models";
+import { useMemo, useState } from "react";
+import { ChatMessage } from "../../models";
 
 const MAX_BUFFER = 250;
 // const MAX_LIFETIME = 60 * 1000;
@@ -21,9 +21,7 @@ export function useMessageStore() {
       timeoutUser(login: string) {
         if (login) {
           setMessages((messages) =>
-            messages.filter(
-              (message) => message.user.login !== login,
-            ),
+            messages.filter((message) => message.user.login !== login)
           );
         } else {
           setMessages([]);
@@ -31,11 +29,11 @@ export function useMessageStore() {
       },
       deleteMessage(id: string) {
         setMessages((messages) =>
-          messages.filter((message) => message.id !== id),
+          messages.filter((message) => message.id !== id)
         );
       },
     }),
-    [messages],
+    [messages]
   );
 
   return actions;

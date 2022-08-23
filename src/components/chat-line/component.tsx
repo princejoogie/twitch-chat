@@ -1,9 +1,9 @@
 import * as React from "react";
-import {ChatMessage} from "../../models";
-import {TwitchAPIBadgeResponse} from "../../models/twitch-api";
-import {ColorCorrection} from "../../util/color-correction";
-import {ChatLineBadges} from "../chat-line-badges";
-import {ChatLineContent} from "../chat-line-content";
+import { ChatMessage } from "../../models";
+import { TwitchAPIBadgeResponse } from "../../models/twitch-api";
+import { ColorCorrection } from "../../util/color-correction";
+import { ChatLineBadges } from "../chat-line-badges";
+import { ChatLineContent } from "../chat-line-content";
 import classes from "./styles.module.scss";
 
 interface Props {
@@ -32,7 +32,7 @@ export const ChatLineComponent: React.FunctionComponent<Props> = ({
             badges={message.badges}
           />
         )}
-        <strong style={{color}} className={classes.name}>
+        <strong style={{ color }} className={classes.name}>
           {message.user.displayName}
           {!message.isAction && ":"}
         </strong>

@@ -1,4 +1,4 @@
-import {ChatEmotePlacement} from "./chat-emote-placement";
+import { ChatEmotePlacement } from "./chat-emote-placement";
 
 export enum ChatEmoteSize {
   Small = "1.0",
@@ -9,7 +9,7 @@ export enum ChatEmoteSize {
 export class ChatEmote {
   public constructor(
     public readonly id: string,
-    public readonly placements: ChatEmotePlacement[],
+    public readonly placements: ChatEmotePlacement[]
   ) {}
 
   public getURL(size: ChatEmoteSize = ChatEmoteSize.Small): string {

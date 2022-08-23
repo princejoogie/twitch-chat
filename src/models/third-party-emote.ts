@@ -8,18 +8,16 @@ export class ThirdPartyEmote {
     public readonly id: string,
     public readonly provider: ThirdPartyEmoteProvider,
     public readonly name: string,
-    public readonly imageUrl: string,
+    public readonly imageUrl: string
   ) {}
 
   public static getFrankerfacezImageURL(emoteId: number) {
     return `https://cdn.frankerfacez.com/emote/${encodeURIComponent(
-      emoteId,
+      emoteId
     )}/1`;
   }
 
   public static getBetterttvImageURL(emoteId: string) {
-    return `https://cdn.betterttv.net/emote/${encodeURIComponent(
-      emoteId,
-    )}/1x`;
+    return `https://cdn.betterttv.net/emote/${encodeURIComponent(emoteId)}/1x`;
   }
 }
