@@ -5,8 +5,7 @@
   "dependencies": {
     "irc-message-ts": "3.0.6",
     "react": "^17.0.1",
-    "react-dom": "^17.0.1",
-    "react-scripts": "4.0.0"
+    "react-dom": "^17.0.1"
   },
   "scripts": {
     "dev": "vite",
@@ -14,14 +13,16 @@
     "preview": "vite preview"
   },
   "devDependencies": {
+    "@esbuild-plugins/node-globals-polyfill": "^0.1.1",
+    "@esbuild-plugins/node-modules-polyfill": "^0.1.4",
     "@types/node": "^12.0.0",
     "@types/react": "^16.9.53",
     "@types/react-dom": "^16.9.8",
     "@vitejs/plugin-react": "^2.0.1",
     "prettier": "^2.7.1",
+    "rollup-plugin-node-polyfills": "^0.2.1",
     "sass": "^1.43.4",
     "typescript": "^4.0.3",
-    "vite": "^3.0.9",
-    "vite-plugin-env-compatible": "^1.1.1"
+    "vite": "^3.0.9"
   }
 }
