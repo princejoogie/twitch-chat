@@ -83,7 +83,11 @@ export const parse7TvBody = (emotes: SevenTvEmoteBody): EmoteMap => {
 export const getSevenTvGlobalEmotes = async (): Promise<EmoteMap> =>
   api
     .get<SevenTvEmoteBody>("https://api.7tv.app/v2/emotes/global")
-    .then((res) => parse7TvBody(res.body));
+    .then((res) => parse7TvBody(res.body))
+    .catch((error) => {
+      console.error("Failed to get 7Tv global emotes", error);
+      return {};
+    });
 
 export const getSeventTvUserEmotes = async (
   channelId: string
@@ -92,7 +96,11 @@ export const getSeventTvUserEmotes = async (
     .get<SevenTvEmoteBody>(
       `https://api.7tv.app/v2/users/${encodeURIComponent(channelId)}/emotes`
     )
-    .then((res) => parse7TvBody(res.body));
+    .then((res) => parse7TvBody(res.body))
+    .catch((error) => {
+      console.error("Failed to get 7Tv user emotes", error);
+      return {};
+    });
 
 export const getBTTVGlobalEmotes = (): Promise<EmoteMap> =>
   api
