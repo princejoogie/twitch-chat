@@ -10,6 +10,7 @@ import {
   FrankerfacezGlobalBody,
   FrankerfacezSet,
   FrankerfacezUserBody,
+  SevenTvEmoteBody,
 } from "./types";
 
 const api = new ApiClient({});
@@ -60,6 +61,38 @@ export const getFFZUserEmotes = (channelId: string): Promise<EmoteMap> =>
       console.error("Failed to get FFZ user emotes", error);
       return {};
     });
+
+export const parse7TvBody = (emotes: SevenTvEmoteBody): EmoteMap => {
+  const emoteMap: EmoteMap = {};
+
+  for (let i = 0; i < emotes?.length ?? 0; ++i) {
+    const emote = emotes[i];
+    if (!emote) continue;
+
+    emoteMap[emote.name] = new ThirdPartyEmote(
+      emote.id,
+      ThirdPartyEmoteProvider.SevenTv,
+      emote.name,
+      ThirdPartyEmote.getSevenTvImageURL(emote.id)
+    );
+  }
+
+  return emoteMap;
+};
+
+export const getSevenTvGlobalEmotes = async (): Promise<EmoteMap> =>
+  api
+    .get<SevenTvEmoteBody>("https://api.7tv.app/v2/emotes/global")
+    .then((res) => parse7TvBody(res.body));
+
+export const getSeventTvUserEmotes = async (
+  channelId: string
+): Promise<EmoteMap> =>
+  api
+    .get<SevenTvEmoteBody>(
+      `https://api.7tv.app/v2/users/${encodeURIComponent(channelId)}/emotes`
+    )
+    .then((res) => parse7TvBody(res.body));
 
 export const getBTTVGlobalEmotes = (): Promise<EmoteMap> =>
   api

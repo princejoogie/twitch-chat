@@ -4,16 +4,25 @@ import { useThirdPartyEmotes } from "../use-third-party-emotes";
 import { MessageParser } from "./message-parser";
 
 export function useMessageContent(message: ChatMessage) {
-  const { bttvGlobalEmotes, bttvUserEmotes, ffzGlobalEmotes, ffzUserEmotes } =
-    useThirdPartyEmotes();
+  const {
+    /* bttvGlobalEmotes, */
+    /* bttvUserEmotes, */
+    /* ffzGlobalEmotes, */
+    /* ffzUserEmotes, */
+    sevenTvUserEmotes,
+    sevenTvGlobalEmotes,
+  } = useThirdPartyEmotes();
   const emoteMap = useMemo(
     () => ({
-      ...bttvGlobalEmotes,
-      ...ffzGlobalEmotes,
-      ...ffzUserEmotes,
-      ...bttvUserEmotes,
+      /* ...bttvGlobalEmotes, */
+      /* ...ffzGlobalEmotes, */
+      /* ...ffzUserEmotes, */
+      /* ...bttvUserEmotes, */
+      ...sevenTvGlobalEmotes,
+      ...sevenTvUserEmotes,
     }),
-    [bttvGlobalEmotes, bttvUserEmotes, ffzGlobalEmotes, ffzUserEmotes]
+    [sevenTvGlobalEmotes, sevenTvUserEmotes]
+    /* [bttvGlobalEmotes, bttvUserEmotes, ffzGlobalEmotes, ffzUserEmotes] */
   );
 
   return MessageParser.parseThirdPartyEmotes(
