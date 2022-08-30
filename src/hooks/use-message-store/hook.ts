@@ -5,6 +5,9 @@ const MAX_BUFFER = 250;
 // const MAX_LIFETIME = 60 * 1000;
 const SLICE_LEVEL = -Math.abs(MAX_BUFFER - 1);
 
+// doesnt include message from nightbot and streamelements
+const BOT_IDS = ["19264788", "100135110"];
+
 export function useMessageStore() {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
 
@@ -14,8 +17,7 @@ export function useMessageStore() {
         return messages;
       },
       addMessage(message: ChatMessage) {
-        console.log("addMessage", message);
-        if (!message.isAction) {
+        if (!BOT_IDS.includes(message.user.id)) {
           setMessages((messages) => {
             return [...messages.slice(SLICE_LEVEL), message];
           });
