@@ -1,4 +1,4 @@
-let twitchID = "87763385";
+let twitchID = "627182835";
 let twitchLogin = "zabyrinth_";
 
 // TODO: This sucks :)
