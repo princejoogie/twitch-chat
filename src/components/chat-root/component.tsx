@@ -22,7 +22,7 @@ export const ChatRoot: React.FunctionComponent<Props> = (props: Props) => {
 
   return (
     <div className={styles.container}>
-      {messages.getMessages().map((message, i) => (
+      {messages.getMessages().map((message) => (
         <ChatLine
           channelBadges={channelBadges}
           globalBadges={globalBadges}

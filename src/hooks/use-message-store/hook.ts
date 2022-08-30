@@ -14,9 +14,12 @@ export function useMessageStore() {
         return messages;
       },
       addMessage(message: ChatMessage) {
-        setMessages((messages) => {
-          return [...messages.slice(SLICE_LEVEL), message];
-        });
+        console.log("addMessage", message);
+        if (!message.isAction) {
+          setMessages((messages) => {
+            return [...messages.slice(SLICE_LEVEL), message];
+          });
+        }
       },
       timeoutUser(login: string) {
         if (login) {
